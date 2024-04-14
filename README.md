@@ -5,7 +5,7 @@
 
 ## Background
 
-En este camino de aprendizaje de automatizar  infraestructura con codigo quise replicar una infraestructura bastante sencilla desde Terraform creando el codigo basico necesario para levantar un servidor de Jenkins en la cloud de AWS. 
+En este camino de aprendizaje de automatizar  infraestructura con código quise replicar una infraestructura bastante sencilla desde Terraform creando el código básico necesario para levantar un servidor de Jenkins en la cloud de AWS. 
 
 ## Requerimientos
 
@@ -75,15 +75,14 @@ Para conectarte a tu instancia EC2: ``ssh -i /path/to/your/private/key.pem ec2-u
 Cambia **/path/to/your/private/key.pem** por la ruta a tu clave privada y **<tu_ip_ec2>** por la dirección IP de tu instancia EC2.
 
 ---
-⛩️ ## Importante ## ⛩️
+## Importante
 
 👉 Modificar la key publica en el archivo key-pair.tf
 
+👉 Cambiar en el archivo `security-group.tf` la siguiente linea: `cidr_blocks = ["0.0.0.0/0"]` y colocar tu IP de la maquina de la cual te vas a conectar.
+
 ---
-
-Con estos pasos, has configurado y desplegado un servidor Jenkins en AWS usando Terraform, siguiendo las mejores prácticas de escalabilidad y seguridad. ¿Hay algo más en lo que pueda asistirte con este despliegue?
-
-
+# Información Extra
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
