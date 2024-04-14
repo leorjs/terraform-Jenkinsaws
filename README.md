@@ -5,7 +5,7 @@
 
 ## Background
 
-La necesidad de automatizar el despliegue de infraestructura y aplicaciones es crucial para agilizar los ciclos de desarrollo de software. Jenkins, un servidor de automatización de código abierto, es ampliamente utilizado para este propósito. AWS, siendo un proveedor de servicios en la nube líder, ofrece una plataforma robusta y escalable para alojar servidores Jenkins. Terraform, por otro lado, proporciona una forma declarativa de definir y gestionar la infraestructura como código, facilitando así la reproducibilidad y la automatización de despliegues.
+En este camino de aprendizaje de automatizar  infraestructura con codigo quise replicar una infraestructura bastante sencilla desde Terraform creando el codigo basico necesario para levantar un servidor de Jenkins en la cloud de AWS. 
 
 ## Requerimientos
 
@@ -21,51 +21,67 @@ El método incluirá la creación de archivos Terraform para:
 1. Definir un proveedor de AWS.
 2. Crear una instancia EC2 `t2.micro` en la región preferida, considerando el uso dentro del nivel gratuito.
 3. Configurar un grupo de seguridad que:
+   
    a. Permita el tráfico HTTP entrante en el puerto 8080 para el acceso a Jenkins.
+   
    b. Permita el tráfico SSH entrante en el puerto 22 para la conectividad administrativa.
-4. Automatizar la instalación de Jenkins en la instancia EC2 mediante scripts de inicio de usuario (user data).
-5. Generar y utilizar un par de claves SSH para la autenticación.
+   
+5. Automatizar la instalación de Jenkins en la instancia EC2 mediante scripts de inicio de usuario (user data).
+6. Generar y utilizar un par de claves SSH para la autenticación.
 
-### Previo a la instalación de la infra
-1.  Primero, necesitarás tener Terraform instalado en tu máquina. Link para la instalación [Install-Terraform](https://developer.hashicorp.com/terraform/install).
+## Previo a la instalación de la infra
+
+1.  Primero es necesario tener Terraform instalado en tu máquina. Link para la instalación [Install-Terraform](https://developer.hashicorp.com/terraform/install).
  
-2.  Asegúrate de tener también configurado tu acceso a AWS, ya sea mediante el archivo ~/.aws/credentials o configurando las variables de entorno AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY.
+2.  Asegúrate de tener  configurado tu acceso a AWS, ya sea mediante el archivo ~/.aws/credentials o configurando las variables de entorno AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY.
 
 ``` Command
 > Configuración conexión con AWS
-> Command:  aws configure
+** Command:  aws configure
 ```
 
-
-Se debe agregar los permisos necesarios para el script de jenkins
+---
+🔎 Se debe agregar los permisos necesarios para el script de JENKINS
 > [!IMPORTANT]
 > chmod +x install_jenkins.sh
-
+---
 
 ## Comandos para crear la infraestructura
 
-Inicializa Terraform para preparar tu entorno.
-terraform init
+✒️Inicializa Terraform para preparar tu entorno.
 
-Revisa el plan de Terraform para asegurarte de que los recursos a crear son los esperados.
-terraform plan
+``terraform init``
 
-Aplica la configuración de Terraform para crear los recursos en AWS.
-terraform apply
+✒️Formatea los archivos.
+
+``terraform fmt``
+
+✒️Valida que no tenga errores en los archivos creados.
+
+``terraform validate``
+
+✒️Revisa el plan de Terraform para asegurarte de que los recursos a crear son los esperados.
+
+``terraform plan``
+
+✒️Aplica la configuración de Terraform para crear los recursos en AWS.
+
+``terraform apply``
 
 
 ## Conexión SSH
-Para conectarte a tu instancia EC2:
+Para conectarte a tu instancia EC2: ``ssh -i /path/to/your/private/key.pem ec2-user@<tu_ip_ec2>``
 
+Cambia **/path/to/your/private/key.pem** por la ruta a tu clave privada y **<tu_ip_ec2>** por la dirección IP de tu instancia EC2.
 
-ssh -i /path/to/your/private/key.pem ec2-user@<tu_ip_ec2>
-Cambia /path/to/your/private/key.pem por la ruta a tu clave privada y <tu_ip_ec2> por la dirección IP de tu instancia EC2.
+---
+⛩️ ## Importante ## ⛩️
+
+👉 Modificar la key publica en el archivo key-pair.tf
+
+---
 
 Con estos pasos, has configurado y desplegado un servidor Jenkins en AWS usando Terraform, siguiendo las mejores prácticas de escalabilidad y seguridad. ¿Hay algo más en lo que pueda asistirte con este despliegue?
-
-
-
-
 
 
 
