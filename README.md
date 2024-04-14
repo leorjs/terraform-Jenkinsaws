@@ -1,6 +1,6 @@
 # Despliegue de Servidor Jenkins en AWS con Terraform
 
-![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
+![](./images/Arquitectura-terraformjenkinsAWS.svg)
 
 
 ## Background
